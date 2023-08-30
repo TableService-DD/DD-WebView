@@ -1,24 +1,20 @@
-import { FoodItem } from "@/util/types";
-import Image from "next/image";
+import { FoodItem } from '../util/types';
 
 function MenuCard({ menu }: { menu: FoodItem }) {
   return (
-    <div className="flex items-center justify-between bg-menuSection px-2 py-1 rounded-md">
-      <div className="flex flex-col">
+    <div className="flex items-center justify-between bg-menuSection px-5 py-1 rounded-md">
+      <div className="flex flex-col items-start">
         <h1>{menu.name}</h1>
-        <p className=" line-clamp-2 text-[13px] text-grayLight">
+        <p className=" line-clamp-2 w-[80%] text-[13px] text-grayLight text-start">
           {menu.menu_intro}
         </p>
         <span className="text-sm">{menu.price}원</span>
       </div>
-      <div className="w-20 h-20 relative">
-        <Image
-          className="object-contain"
-          src={menu.image}
-          alt={menu.name}
-          layout="fill"
-        />
-      </div>
+      <img
+        className="w-[75px] h-[75px] object-cover rounded-md"
+        src={menu.image}
+        alt={menu.name}
+      />
     </div>
   );
 }
