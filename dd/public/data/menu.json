@@ -1,0 +1,166 @@
+{
+  "BURGER": [
+    {
+      "name": "Cheese",
+      "price": 10000,
+      "image": "/images/menuImage/image1.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "고소한 치즈와 함께 향긋한 고기의 맛이 입 안 가득!",
+      "isBest": true,
+      "foodId": 11,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리", "price": 3000 },
+        { "name": "머스타드", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+
+    {
+      "name": "Double Cheese",
+      "price": 15000,
+      "image": "/images/menuImage/image2.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "이중으로 즐기는 치즈의 풍미와 풍성한 고기!",
+      "isBest": true,
+      "foodId": 12,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+    {
+      "name": "Spicy Shrimp",
+      "price": 20000,
+      "image": "/images/menuImage/image3.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "매콤한 칠리소스와 새우의 조화가 환상적인 버거",
+      "hotLevel": 3,
+      "isBest": false,
+      "foodId": 13,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    }
+  ],
+  "SANDWICH": [
+    {
+      "name": "Ham & Cheese",
+      "price": 10000,
+      "image": "/images/menuImage/image4.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "햄과 치즈의 클래식한 조합이 더욱 맛있게",
+      "isBest": true,
+      "foodId": 21,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+    {
+      "name": "Abocado",
+      "price": 15000,
+      "image": "/images/menuImage/image5.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "신선한 아보카도와 함께 특별한 샌드위치를 즐겨보세요",
+      "hotLevel": 2,
+      "isBest": false,
+      "foodId": 22,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+    {
+      "name": "Spicy Shrimp",
+      "price": 20000,
+      "image": "/images/menuImage/image6.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "매콤한 새우와 신선한 야채의 완벽한 조화!",
+      "hotLevel": 1,
+      "isBest": false,
+      "foodId": 23,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+    {
+      "name": "Signature",
+      "price": 17000,
+      "image": "/images/menuImage/image1.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "SANDZ만의 특별한 레시피로 만든 시그니처 샌드위치",
+
+      "isBest": true,
+      "foodId": 24,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+    {
+      "name": "Chicken",
+      "price": 15000,
+      "image": "/images/menuImage/image2.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "부드러운 치킨과 신선한 야채의 조합이 돋보이는 샌드위치",
+      "isBest": false,
+      "foodId": 25,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    },
+    {
+      "name": "Beef",
+      "price": 15000,
+      "image": "/images/menuImage/image3.png",
+      "bannerImage": "/images/bannerImage/basic.png",
+      "menu_intro": "촉촉한 소고기와 함께 풍미 깊은 샌드위치를",
+      "hotLevel": 1,
+      "isBest": false,
+      "foodId": 26,
+      "addOption": [
+        { "name": "새우", "price": 2000 },
+        { "name": "칠리소스", "price": 3000 }
+      ],
+      "origin": [
+        { "name": "새우", "country": "베트남산" },
+        { "name": "홍합", "country": "국내산" }
+      ]
+    }
+  ]
+}
