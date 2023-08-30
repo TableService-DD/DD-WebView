@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { HashLoader } from 'react-spinners';
-import { Tokens, UserInfo, getLogin } from '../api/auth';
+import { UserInfo, getLogin } from '../api/auth';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [userInfo, setUserInfo] = useState<UserInfo>({ id: '', pw: '' });
-  const [tokens, setTokens] = useState<Tokens | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInfo({
@@ -18,13 +18,14 @@ function LoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-
     const tokens = await getLogin(userInfo);
 
     setIsLoading(false);
 
     if (tokens) {
-      setTokens(tokens);
+      const storeName = 'Starbucks';
+      const tableNumber = '1';
+      navigate(`/order/${storeName}/${tableNumber}`);
     } else {
       alert('Login Failed');
     }

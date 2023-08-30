@@ -1,12 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import './App.css';
+import { useEffect } from 'react';
+import { getRefresh } from './api/auth';
 
 function App() {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  useEffect(() => {
+    getRefresh();
+  }, []);
+
+  return <Outlet />;
 }
 
 export default App;
