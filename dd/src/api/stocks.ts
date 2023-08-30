@@ -15,7 +15,7 @@ export async function getStocks(): Promise<Stock[] | boolean> {
   try {
     const response = await axios.get(`${BASE_URL}/stocks/list`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
       },
     });
     console.log(response);
@@ -30,7 +30,7 @@ export async function addStocks(item: Stock): Promise<boolean> {
   try {
     const response = await axios.post(`${BASE_URL}/stocks`, item, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
       },
     });
     console.log(response);
