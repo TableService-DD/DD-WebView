@@ -5,6 +5,7 @@ import { FoodItem, Menu } from '../util/types';
 import StoreHeader from '../components/StoreHeader';
 import MenuCard from '../components/MenuCard';
 import '../style/styles.css';
+import Carts from '../components/Carts';
 function Order() {
   const { storeName = 'Default Store', tableNumber = '0' } = useParams<{
     storeName?: string;
@@ -29,7 +30,7 @@ function Order() {
   }, []);
 
   return (
-    <section className="py-[10px]">
+    <section className="py-[10px] relative">
       <div className="px-[10px]">
         <StoreHeader title={storeName} tableNumber={tableNumber} />
       </div>
@@ -42,7 +43,7 @@ function Order() {
             key={item}
           >
             <span
-              className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[3px] animated-width 
+              className={`rounded-full absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[3px] animated-width 
           ${
             selectedCategory === item
               ? 'w-4/5 bg-gradient-to-r from-orange-300 to-orange-600'
@@ -64,6 +65,7 @@ function Order() {
           <div>Loading menus...</div>
         )}
       </div>
+      <Carts />
     </section>
   );
 }
