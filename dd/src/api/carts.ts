@@ -14,7 +14,7 @@ export async function getCarts(): Promise<CartItem[] | boolean> {
   try {
     const response = await axios.get(`${BASE_URL}/cart/list`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
     console.log(response);
@@ -29,7 +29,7 @@ export async function addCarts(item: CartItem): Promise<boolean> {
   try {
     const response = await axios.post(`${BASE_URL}/cart/add`, item, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
     console.log(response);
@@ -44,7 +44,7 @@ export async function deleteCarts(item: CartItem): Promise<boolean> {
   try {
     const response = await axios.delete(`${BASE_URL}/cart/delete`, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
       params: {
         product_id: item.product_id,
@@ -62,7 +62,7 @@ export async function updateCarts(item: CartItem) {
   try {
     const response = await axios.put(`${BASE_URL}/cart/update`, item, {
       headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
     console.log(response);

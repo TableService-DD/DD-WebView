@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom';
 import { FoodItem } from '../util/types';
 
 function MenuCard({ menu }: { menu: FoodItem }) {
   return (
-    <div className="flex items-center justify-between bg-menuSection px-5 py-1 rounded-md">
+    <Link
+      to={`/order/${menu.foodId}`}
+      className="flex items-center justify-between bg-menuSection px-5 py-1 rounded-md"
+    >
       <div className="flex flex-col items-start">
         <h1>{menu.name}</h1>
         <p className=" line-clamp-2 w-[80%] text-[13px] text-grayLight text-start">
@@ -15,7 +19,7 @@ function MenuCard({ menu }: { menu: FoodItem }) {
         src={menu.image}
         alt={menu.name}
       />
-    </div>
+    </Link>
   );
 }
 

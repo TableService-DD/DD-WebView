@@ -26,7 +26,7 @@ function Carts() {
     },
   ];
   return (
-    <section className="z-0 fixed flex items-center bottom-[60px] w-[80%] h-[65px] right-10">
+    <section className="z-0 sticky mx-auto flex items-center bottom-[70px] w-[80%] h-[65px] right-10">
       <CSSTransition
         in={!isVisible}
         timeout={300}
@@ -54,7 +54,7 @@ function Carts() {
               </div>
             ))}
           </div>
-          <button className="fixed bottom-3 text-2xl font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full">
+          <button className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%]  self-center h-[40px] bg-white text-black border-2 border-primary rounded-full">
             주문 준비
           </button>
         </div>
