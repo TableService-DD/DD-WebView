@@ -1,4 +1,3 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
@@ -7,6 +6,7 @@ import Home from './pages/Home.tsx';
 import LoginPage from './pages/LoginPage.tsx';
 import Order from './pages/Order.tsx';
 import FoodDetail from './pages/FoodDetail.tsx';
+import TmpDetail from './pages/TmpDetail.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,11 +23,15 @@ const router = createBrowserRouter([
       },
       {
         path: 'order/:storeName/:tableNumber',
-        element: <Order />,
+        element: (
+          <div className="max-w-lg mx-auto border-x-2 p-1">
+            <Order />
+          </div>
+        ),
       },
       {
         path: 'order/:foodId',
-        element: <FoodDetail />,
+        element: <TmpDetail />,
       },
     ],
   },
