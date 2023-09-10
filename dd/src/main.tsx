@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage.tsx';
 import Order from './pages/Order.tsx';
 import FoodDetail from './pages/FoodDetail.tsx';
 import TmpDetail from './pages/TmpDetail.tsx';
+import FakeDetail from './pages/FakeDetail.tsx';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'order/:foodId',
+        element: <FoodDetail />,
+      },
+      {
+        path: 'manage/order',
         element: <TmpDetail />,
       },
     ],

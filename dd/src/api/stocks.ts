@@ -30,12 +30,45 @@ const items: Stock = {
 // }
 // axios 인스턴스 생성
 
+// export async function getStocks(): Promise<Stock[] | any> {
+//   try {
+//     const response = await axios.get(
+//       `${BASE_URL}/stocks/list?store_code=${STORE_CODE}`,
+//     );
+//     console.log(response);
+//     return response.data.stocks;
+//   } catch (error) {
+//     console.error(error);
+//     return error;
+//   }
+// }
 export async function getStocks(): Promise<Stock[] | any> {
   try {
-    const response = await apiInstance.get(
-      `/stocks/list?store_code=${STORE_CODE}&stock_id=0IFUHLZKGET9RX8DMCJYWV5Q`,
+    const response = await axios.get(
+      `${BASE_URL}/stocks/list?store_code=${STORE_CODE}`,
     );
-    console.log(response.data.stocks);
+
+    const modifiedStocks = response.data.stocks.map((stock: Stock) => {
+      return {
+        ...stock,
+        stock_image: [`/images/menuImage/image1.png`],
+      };
+    });
+
+    console.log(modifiedStocks);
+    return modifiedStocks;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+export async function getDetailStocks(id: string): Promise<Stock | any> {
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/stocks/list?store_code=${STORE_CODE}&stock_id=${id}`,
+    );
+    console.log(response);
     return response.data.stocks;
   } catch (error) {
     console.error(error);

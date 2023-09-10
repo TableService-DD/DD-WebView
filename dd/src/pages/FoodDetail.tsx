@@ -1,33 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Stock, getStocks, addStocksImage } from '../api/stocks';
+import { getStocks, addStocksImage, getDetailStocks } from '../api/stocks';
 import Header from '../components/Header';
 import { IMAGE_URL } from '../api';
+import { Stock } from '../util/types';
+import { useParams } from 'react-router-dom';
 
 function FoodDetail() {
   const [stocks, setStocks] = useState<Stock[] | null>(null);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-
+  const { stock_id } = useParams<{ stock_id: string }>();
   useEffect(() => {
     const fetchStocks = async () => {
-      const result = await getStocks();
+      const result = await getDetailStocks(stock_id);
       setStocks(result);
     };
 
     fetchStocks();
   }, []);
-
-  const handleImageUpload = async () => {
-    if (selectedImage) {
-      const formData = new FormData();
-      formData.append('image', selectedImage);
-      const result = await addStocksImage([formData]);
-      if (result) {
-        alert('Image uploaded successfully');
-      } else {
-        alert('Failed to upload the image');
-      }
-    }
-  };
 
   return (
     <section>
@@ -38,7 +27,8 @@ function FoodDetail() {
             <div key={stock.stock_id}>
               <h1>{stock.stock_name}</h1>
               <img
-                src={`${IMAGE_URL}${stock.stock_images[1]}`}
+                className="w-full p-4 border-2 h-[200px]"
+                src={`${stock.stock_image[0]}`}
                 alt={stock.stock_name}
               />
             </div>
@@ -46,16 +36,6 @@ function FoodDetail() {
         ) : (
           <h1>로딩중...</h1>
         )}
-      </div>
-
-      <div>
-        <input
-          type="file"
-          onChange={(e) =>
-            setSelectedImage(e.target.files ? e.target.files[0] : null)
-          }
-        />
-        <button onClick={handleImageUpload}>Upload Image</button>
       </div>
     </section>
   );

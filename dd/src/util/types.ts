@@ -34,4 +34,5 @@ export interface Stock {
   stock_description: string;
   stock_option: { [key: string]: number } | null;
   stock_image: string[];
+  stock_category: string;
 }

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import { addStocks, Stock, STORE_CODE } from '../api/stocks';
+import { addStocks, STORE_CODE } from '../api/stocks';
+import { generateStockId } from '../util/uuid';
+import { Stock } from '../util/types';
 
 function TmpDetail() {
   const [stockData, setStockData] = useState<Partial<Stock>>({
     store_code: STORE_CODE,
+    stock_id: generateStockId(),
     stock_option: {},
     stock_image: [],
   });
+
   const [optionKeys, setOptionKeys] = useState<string[]>([]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +42,10 @@ function TmpDetail() {
 
   const handleSubmit = async () => {
     if (stockData) {
-      const success = await addStocks(stockData as Stock);
+      const success = await addStocks({
+        ...stockData,
+        stock_id: generateStockId(),
+      } as Stock);
       if (success) {
         alert('Stock added successfully!');
       } else {
@@ -59,12 +66,6 @@ function TmpDetail() {
         />
         <input
           type="text"
-          name="stock_id"
-          placeholder="Stock ID"
-          onChange={handleInputChange}
-        />
-        <input
-          type="text"
           name="stock_price"
           placeholder="Stock Price"
           onChange={handleInputChange}
@@ -73,6 +74,12 @@ function TmpDetail() {
           type="text"
           name="stock_description"
           placeholder="Description"
+          onChange={handleInputChange}
+        />
+        <input
+          type="text"
+          name="stock_category"
+          placeholder="Stock Category"
           onChange={handleInputChange}
         />
         {optionKeys.map((key, index) => (
@@ -100,5 +107,4 @@ function TmpDetail() {
     </section>
   );
 }
-
 export default TmpDetail;
