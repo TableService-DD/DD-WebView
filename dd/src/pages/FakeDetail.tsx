@@ -12,7 +12,7 @@ function FakeDetail() {
       '토마토 추가': 500,
       '치즈 추가': 700,
     },
-    stock_image: ['/images/menuImage/image2.png'],
+    stock_image: [],
   };
   return (
     <section className="flex flex-col">

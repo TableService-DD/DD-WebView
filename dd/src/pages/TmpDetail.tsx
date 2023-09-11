@@ -13,10 +13,17 @@ function TmpDetail() {
   });
 
   const [optionKeys, setOptionKeys] = useState<string[]>([]);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setStockData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedImage(e.target.files[0]);
+    }
   };
 
   const handleOptionChange = (key: string) => {
@@ -42,10 +49,15 @@ function TmpDetail() {
 
   const handleSubmit = async () => {
     if (stockData) {
-      const success = await addStocks({
-        ...stockData,
-        stock_id: generateStockId(),
-      } as Stock);
+      const formData = new FormData();
+      Object.keys(stockData).forEach((key) => {
+        formData.append(key, stockData[key]);
+      });
+      if (selectedImage) {
+        formData.append('stock_image', selectedImage);
+      }
+
+      const success = await addStocks(formData); // Assuming addStocks can handle FormData
       if (success) {
         alert('Stock added successfully!');
       } else {
@@ -91,6 +103,7 @@ function TmpDetail() {
             onChange={(e) => handleOptionKeyChange(index, e.target.value)}
           />
         ))}
+        <input type="file" onChange={handleImageChange} />
         <button
           className="w-full p-2 bg-primary my-4 text-center text-white"
           onClick={handleAddOptionKey}
@@ -107,4 +120,5 @@ function TmpDetail() {
     </section>
   );
 }
+
 export default TmpDetail;

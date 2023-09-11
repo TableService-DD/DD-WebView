@@ -68,8 +68,14 @@ export async function getDetailStocks(id: string): Promise<Stock | any> {
     const response = await axios.get(
       `${BASE_URL}/stocks/list?store_code=${STORE_CODE}&stock_id=${id}`,
     );
-    console.log(response);
-    return response.data.stocks;
+
+    const modifiedStock = {
+      ...response.data.stocks[0],
+      stock_image: [`/images/menuImage/image1.png`],
+    };
+
+    console.log(modifiedStock);
+    return modifiedStock;
   } catch (error) {
     console.error(error);
     return error;

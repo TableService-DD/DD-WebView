@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'order/:foodId',
+        path: 'order/:stock_id',
         element: <FoodDetail />,
       },
       {

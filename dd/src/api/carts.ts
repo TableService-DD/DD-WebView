@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { BASE_URL } from '.';
+import apiInstance from './apiInstance';
 
 export interface CartItem {
   user_id: string;
@@ -27,11 +28,7 @@ export async function getCarts(): Promise<CartItem[] | boolean> {
 
 export async function addCarts(item: CartItem): Promise<boolean> {
   try {
-    const response = await axios.post(`${BASE_URL}/cart/add`, item, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-    });
+    const response = await apiInstance.post(`${BASE_URL}/cart/add`, item);
     console.log(response);
     return true;
   } catch (error) {
@@ -42,10 +39,7 @@ export async function addCarts(item: CartItem): Promise<boolean> {
 
 export async function deleteCarts(item: CartItem): Promise<boolean> {
   try {
-    const response = await axios.delete(`${BASE_URL}/cart/delete`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
+    const response = await apiInstance.delete(`${BASE_URL}/cart/delete`, {
       params: {
         product_id: item.product_id,
       },
@@ -60,11 +54,7 @@ export async function deleteCarts(item: CartItem): Promise<boolean> {
 
 export async function updateCarts(item: CartItem) {
   try {
-    const response = await axios.put(`${BASE_URL}/cart/update`, item, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-    });
+    const response = await apiInstance.put(`${BASE_URL}/cart/update`, item);
     console.log(response);
     return true;
   } catch (error) {
