@@ -8,6 +8,7 @@ import Order from './pages/Order.tsx';
 import FoodDetail from './pages/FoodDetail.tsx';
 import TmpDetail from './pages/TmpDetail.tsx';
 import FakeDetail from './pages/FakeDetail.tsx';
+import OrderList from './pages/OrderList.tsx';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: 'order/:stock_id',
         element: <FoodDetail />,
+      },
+      {
+        path: 'order_list/:storeName/:tableNumber',
+        element: <OrderList />,
       },
       {
         path: 'manage/order',

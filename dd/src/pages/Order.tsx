@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getStocks, tmpGetMenus } from '../api/stocks';
 import { FoodItem, Menu, Stock } from '../util/types';
 import StoreHeader from '../components/StoreHeader';
@@ -8,6 +8,7 @@ import '../style/styles.css';
 import Carts from '../components/Carts';
 import { CartItem, getCarts } from '../api/carts';
 function Order() {
+  const navigate = useNavigate();
   const { storeName = 'Default Store', tableNumber = '0' } = useParams<{
     storeName?: string;
     tableNumber?: string;
@@ -76,9 +77,13 @@ function Order() {
           <div>Loading menus...</div>
         )}
       </div>
-      {cart.length && <Carts carts={cart} />}
+      {cart.length > 0 && <Carts carts={cart} />}
+
       <div className="flex justify-center">
-        <button className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full">
+        <button
+          onClick={() => navigate('/')}
+          className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full"
+        >
           주문 준비
         </button>
       </div>
