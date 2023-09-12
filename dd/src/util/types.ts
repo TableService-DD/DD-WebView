@@ -26,4 +26,13 @@ export type Menu = {
   SANDWICH: FoodItem[];
 };
 
-// 사용 예
+export interface Stock {
+  store_code: string;
+  stock_name: string;
+  stock_id: string;
+  stock_price: string;
+  stock_description: string;
+  stock_option: { [key: string]: number } | null;
+  stock_image: string[];
+  stock_category: string;
+}

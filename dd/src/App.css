@@ -1,0 +1,8 @@
+#testbox::-webkit-scrollbar {
+  display: none;
+}
+
+#testbox {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

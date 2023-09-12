@@ -22,8 +22,8 @@ export async function getLogin(userInfo: UserInfo): Promise<boolean> {
       'access_token' in response.data.data
     ) {
       console.log('Login Success:', response.data);
-      sessionStorage.setItem('access_token', response.data.data.access_token);
-      sessionStorage.setItem('refresh_token', response.data.data.refresh_token);
+      localStorage.setItem('access_token', response.data.data.access_token);
+      localStorage.setItem('refresh_token', response.data.data.refresh_token);
       return true;
     }
     return false;
@@ -37,16 +37,16 @@ export async function getRefresh(): Promise<boolean> {
   try {
     const response = await axios.post(
       `${BASE_URL}/user/refresh`,
-      {}, // POST 요청 본문은 비워둡니다.
+      {},
       {
         params: {
-          refresh_token: sessionStorage.getItem('refresh_token'),
+          refresh_token: localStorage.getItem('refresh_token'),
         },
       },
     );
 
     if (response.status === 200 && response.data) {
-      sessionStorage.setItem('access_token', response.data.access_token);
+      localStorage.setItem('access_token', response.data.access_token);
       console.log('Refresh Success:');
       return true;
     }

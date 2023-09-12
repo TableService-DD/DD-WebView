@@ -1,0 +1,34 @@
+.animated-width {
+  transition: width 0.3s ease-in-out;
+}
+/* 이 클래스는 메뉴가 담긴 컨테이너와 버튼에 적용될 애니메이션을 정의합니다 */
+.container-enter,
+.container-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.container-enter-active,
+.container-exit-done {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+.my-node-enter,
+.my-node-exit-active {
+  opacity: 0;
+  display: none;
+}
+
+.my-node-enter-active,
+.my-node-exit {
+  opacity: 1;
+  display: block;
+}
+
+.my-node-enter-active,
+.my-node-exit-active {
+  transition: opacity 300ms;
+}
