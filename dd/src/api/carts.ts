@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { BASE_URL } from '.';
 import apiInstance from './apiInstance';
 
@@ -9,17 +8,22 @@ export interface CartItem {
   product_price: number;
   product_count: number;
   product_option: { [key: string]: number } | null;
+  product_image: string[];
 }
 
 export async function getCarts(): Promise<CartItem[] | boolean> {
   try {
-    const response = await axios.get(`${BASE_URL}/cart/list`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-    });
+    const response = await apiInstance.get(`${BASE_URL}/cart/list`);
     console.log(response);
-    return response.data;
+
+    const modifiedCarts = response.data.data.map((cartItem: CartItem) => {
+      return {
+        ...cartItem,
+        product_image: ['/images/menuImage/image1.png'],
+      };
+    });
+
+    return modifiedCarts;
   } catch (error) {
     console.error(error);
     return false;

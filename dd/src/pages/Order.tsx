@@ -6,6 +6,7 @@ import StoreHeader from '../components/StoreHeader';
 import MenuCard from '../components/MenuCard';
 import '../style/styles.css';
 import Carts from '../components/Carts';
+import { CartItem, getCarts } from '../api/carts';
 function Order() {
   const { storeName = 'Default Store', tableNumber = '0' } = useParams<{
     storeName?: string;
@@ -28,7 +29,17 @@ function Order() {
     };
     fetchData();
   }, []);
+  const [cart, setCart] = useState<CartItem[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getCarts();
+      if (result !== false) {
+        setCart(result as CartItem[]);
+      }
+    };
 
+    fetchData();
+  }, []);
   return (
     <section className="py-[10px] relative">
       <div className="px-[10px]">
@@ -65,7 +76,7 @@ function Order() {
           <div>Loading menus...</div>
         )}
       </div>
-      <Carts />
+      {cart.length && <Carts carts={cart} />}
       <div className="flex justify-center">
         <button className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full">
           주문 준비
