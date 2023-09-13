@@ -1,22 +1,31 @@
 import axios from 'axios';
 import { BASE_URL } from '.';
-import { CartItem } from './carts';
+import apiInstance from './apiInstance';
+import { STORE_CODE } from './stocks';
 
+export type OptionItem = {
+  [key: string]: {
+    price: number;
+    quantity: number;
+  };
+};
 export interface OrderItem {
   store_code: string;
   table_number: string;
   product_id: string;
   product_price: number;
   product_count: number;
-  product_option: { [key: string]: number } | null;
+  product_option: OptionItem | null;
   product_status: boolean;
 }
 
 export async function getOrders(): Promise<OrderItem[] | boolean> {
   try {
-    const response = await axios.get(`${BASE_URL}/order/list`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    const response = await apiInstance.get(`${BASE_URL}/order/list`, {
+      params: {
+        store_code: STORE_CODE,
+        table_number: 1,
+        status: true,
       },
     });
     console.log(response);
@@ -29,11 +38,7 @@ export async function getOrders(): Promise<OrderItem[] | boolean> {
 
 export async function addOrders(item: OrderItem): Promise<boolean> {
   try {
-    const response = await axios.post(`${BASE_URL}/cart/add`, item, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
-    });
+    const response = await apiInstance.post(`${BASE_URL}/cart/add`, item);
     console.log(response);
     return true;
   } catch (error) {
@@ -44,27 +49,9 @@ export async function addOrders(item: OrderItem): Promise<boolean> {
 
 export async function deleteOrders(item: OrderItem): Promise<boolean> {
   try {
-    const response = await axios.delete(`${BASE_URL}/cart/delete`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      },
+    const response = await apiInstance.delete(`${BASE_URL}/cart/delete`, {
       params: {
         product_id: item.product_id,
-      },
-    });
-    console.log(response);
-    return true;
-  } catch (error) {
-    console.error(error);
-    return false;
-  }
-}
-
-export async function updateCarts(item: CartItem) {
-  try {
-    const response = await axios.put(`${BASE_URL}/cart/update`, item, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       },
     });
     console.log(response);

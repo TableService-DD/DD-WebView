@@ -9,6 +9,7 @@ import FoodDetail from './pages/FoodDetail.tsx';
 import TmpDetail from './pages/TmpDetail.tsx';
 import FakeDetail from './pages/FakeDetail.tsx';
 import OrderList from './pages/OrderList.tsx';
+import FakeOrder from './pages/FakeOrder.tsx';
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: 'manage/order',
         element: <TmpDetail />,
+      },
+      {
+        path: 'fake/order',
+        element: <FakeOrder />,
       },
     ],
   },
