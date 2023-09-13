@@ -23,24 +23,33 @@ function Order() {
     'SIDE',
     'DRINK',
   ];
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const menus = await getStocks();
+  //     setMenuData(menus);
+  //   };
+  //   fetchData();
+  // }, []);
   useEffect(() => {
     const fetchData = async () => {
-      const menus = await getStocks();
+      const menus = await tmpGetMenus();
       setMenuData(menus);
     };
     fetchData();
-  }, []);
-  const [cart, setCart] = useState<CartItem[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getCarts();
-      if (result !== false) {
-        setCart(result as CartItem[]);
-      }
-    };
+  });
+  // CART  DATA
 
-    fetchData();
-  }, []);
+  // const [cart, setCart] = useState<CartItem[]>([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await getCarts();
+  //     if (result !== false) {
+  //       setCart(result as CartItem[]);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   return (
     <section className="py-[10px] relative">
       <div className="px-[10px]">
@@ -77,7 +86,7 @@ function Order() {
           <div>Loading menus...</div>
         )}
       </div>
-      {cart.length > 0 && <Carts carts={cart} />}
+      {/* {cart.length > 0 && <Carts carts={cart} />} */}
 
       <div className="flex justify-center">
         <button

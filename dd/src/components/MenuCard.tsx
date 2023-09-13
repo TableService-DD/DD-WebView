@@ -5,7 +5,7 @@ function MenuCard({ menu }: { menu: Stock }) {
   return (
     <Link
       to={`/order/${menu.stock_id}`}
-      className="flex items-center justify-between bg-menuSection px-5 py-1 rounded-md"
+      className="flex items-center justify-between px-5 py-1  border-b-[1px]"
     >
       <div className="flex flex-col items-start">
         <h1>{menu.stock_name}</h1>

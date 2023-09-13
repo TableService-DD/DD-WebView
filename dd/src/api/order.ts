@@ -25,7 +25,7 @@ export async function getOrders(): Promise<OrderItem[] | boolean> {
       params: {
         store_code: STORE_CODE,
         table_number: 1,
-        status: true,
+        status: false,
       },
     });
     console.log(response);

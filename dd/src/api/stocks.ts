@@ -129,8 +129,8 @@ export async function addStocksImage(images: FormData[]): Promise<boolean> {
   }
 }
 
-export async function tmpGetMenus(): Promise<Menu> {
-  const response = await axios.get(`/data/menu.json`);
+export async function tmpGetMenus(): Promise<Stock[]> {
+  const response = await axios.get(`/data/fake.json`);
   console.log(response);
   return response.data;
 }
