@@ -52,32 +52,29 @@ function Order() {
   // }, []);
   return (
     <section className="py-[10px] relative">
-      <div className="px-[10px]">
-        <StoreHeader title={storeName} tableNumber={tableNumber} />
-      </div>
+      <StoreHeader title={storeName} tableNumber={tableNumber} />
       {/* CATEGORY SELECT 부분 */}
-      <div className="grid grid-cols-4 my-4 px-4">
+      <div className="flex gap-5 px-5 overflow-x-scroll hide-scrollbar">
         {category.map((item: string, index: number) => (
           <button
-            className="relative w-full px-2 py-1"
+            className="relative w-full px-2 py-1 pb-2"
             onClick={() => setSelectedCategory(item)}
-            key={item}
+            key={index}
           >
             <span
-              className={`rounded-full absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[3px] animated-width 
-          ${
-            selectedCategory === item
-              ? 'w-4/5 bg-gradient-to-r from-orange-300 to-orange-600'
-              : 'w-0'
-          }`}
+              className={`rounded-xl absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[3px] animated-width 
+      ${
+        selectedCategory === item ? 'w-full bg-gradient-to-r bg-black' : 'w-0'
+      }`}
             />
             {item}
           </button>
         ))}
       </div>
 
-      <div className="w-full h-[2px] bg-primary" />
-      <div className="flex flex-col gap-1 h-fit border-b-2">
+      {/* <div className="w-full h-[2px] bg-primary" /> */}
+
+      <div className="flex flex-col gap-1 h-fit">
         {menuData ? (
           menuData.map((item: Stock, index: number) => (
             <MenuCard key={item.stock_id} menu={item} isFirst={index === 0} />
@@ -87,13 +84,15 @@ function Order() {
         )}
       </div>
       {/* {cart.length > 0 && <Carts carts={cart} />} */}
-
-      <div className="flex justify-center">
-        <button
-          onClick={() => navigate('/')}
-          className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full"
-        >
-          주문 준비
+      <div className="fixed bottom-0 w-full h-[90px] bg-white border-t-[1px] flex justify-center items-center rounded-t-xl">
+        <button className="w-[90%] bg-primary text-white h-[50px] rounded-md flex justify-between items-center px-[18px]">
+          <div className="basis-[25%]">
+            <span className="rounded-full bg-white text-sm semibold w-[25px] h-[25px] flex items-center justify-center text-primary flex-shrink-0 ">
+              1
+            </span>
+          </div>
+          <span className="semibold text-center">장바구니 보기</span>
+          <span className="medium flex-shrink-0 basis-[25%]">9000원</span>
         </button>
       </div>
     </section>

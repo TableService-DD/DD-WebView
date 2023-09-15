@@ -20,7 +20,7 @@
     "stock_description": "시원한 콜라입니다."
   },
   {
-    "stock_id": "9I4C6POXYZE1F0VT7GW2UNBL",
+    "stock_id": "2312PSEMSDNAWEA123",
     "stock_name": "사이다",
     "stock_price": 1500,
     "stock_status": "판매중",
@@ -30,7 +30,37 @@
     "stock_description": "시원한 사이다입니다."
   },
   {
-    "stock_id": "0J5D7PQWAZE1S2XT6GF3VOYR",
+    "stock_id": "KVEOWNAD123123",
+    "stock_name": "오렌지주스",
+    "stock_price": 2000,
+    "stock_status": "판매중",
+    "stock_code": "2B5YG1OHDU9SZTJM7WCXQLEV",
+    "stock_image": ["/images/menuImage/image4.png"],
+    "stock_option": {},
+    "stock_description": "신선한 오렌지주스입니다."
+  },
+  {
+    "stock_id": "56SPGMWNAD1231",
+    "stock_name": "콜라",
+    "stock_price": 1500,
+    "stock_status": "판매중",
+    "stock_code": "2B5YG1OHDU9SZTJM7WCXQLEV",
+    "stock_image": ["/images/menuImage/image2.png"],
+    "stock_option": {},
+    "stock_description": "시원한 콜라입니다."
+  },
+  {
+    "stock_id": "sndanscqcoqwe122",
+    "stock_name": "사이다",
+    "stock_price": 1500,
+    "stock_status": "판매중",
+    "stock_code": "2B5YG1OHDU9SZTJM7WCXQLEV",
+    "stock_image": ["/images/menuImage/image3.png"],
+    "stock_option": {},
+    "stock_description": "시원한 사이다입니다."
+  },
+  {
+    "stock_id": "0k2kasd123",
     "stock_name": "오렌지주스",
     "stock_price": 2000,
     "stock_status": "판매중",
