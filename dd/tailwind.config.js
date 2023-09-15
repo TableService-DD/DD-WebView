@@ -10,10 +10,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#FF6A00',
-        menuSection: '#EFEFEF',
+        primary: '#FF5810',
+        pressed: '#E44400',
+        menuSection: '#F5F5F5',
         textGray: '#343434',
         grayLight: '#848484',
+        Gray00: '#0F0F0F',
+        LineGray: '#CECECE',
       },
     },
   },

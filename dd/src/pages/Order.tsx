@@ -77,10 +77,10 @@ function Order() {
       </div>
 
       <div className="w-full h-[2px] bg-primary" />
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 h-fit border-b-2">
         {menuData ? (
-          menuData.map((item: Stock) => (
-            <MenuCard key={item.stock_id} menu={item} />
+          menuData.map((item: Stock, index: number) => (
+            <MenuCard key={item.stock_id} menu={item} isFirst={index === 0} />
           ))
         ) : (
           <div>Loading menus...</div>

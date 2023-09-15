@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {
         path: 'order/:storeName/:tableNumber',
         element: (
-          <div className="max-w-lg mx-auto border-x-2 p-1">
+          <div className="max-w-lg mx-auto p-1">
             <Order />
           </div>
         ),
