@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getStocks, tmpGetMenus } from '../api/stocks';
 import { FoodItem, Menu, Stock } from '../util/types';
 import StoreHeader from '../components/StoreHeader';
@@ -8,6 +8,7 @@ import '../style/styles.css';
 import Carts from '../components/Carts';
 import { CartItem, getCarts } from '../api/carts';
 function Order() {
+  const navigate = useNavigate();
   const { storeName = 'Default Store', tableNumber = '0' } = useParams<{
     storeName?: string;
     tableNumber?: string;
@@ -22,24 +23,33 @@ function Order() {
     'SIDE',
     'DRINK',
   ];
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const menus = await getStocks();
+  //     setMenuData(menus);
+  //   };
+  //   fetchData();
+  // }, []);
   useEffect(() => {
     const fetchData = async () => {
-      const menus = await getStocks();
+      const menus = await tmpGetMenus();
       setMenuData(menus);
     };
     fetchData();
-  }, []);
-  const [cart, setCart] = useState<CartItem[]>([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await getCarts();
-      if (result !== false) {
-        setCart(result as CartItem[]);
-      }
-    };
+  });
+  // CART  DATA
 
-    fetchData();
-  }, []);
+  // const [cart, setCart] = useState<CartItem[]>([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await getCarts();
+  //     if (result !== false) {
+  //       setCart(result as CartItem[]);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
   return (
     <section className="py-[10px] relative">
       <div className="px-[10px]">
@@ -67,18 +77,22 @@ function Order() {
       </div>
 
       <div className="w-full h-[2px] bg-primary" />
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 h-fit border-b-2">
         {menuData ? (
-          menuData.map((item: Stock) => (
-            <MenuCard key={item.stock_id} menu={item} />
+          menuData.map((item: Stock, index: number) => (
+            <MenuCard key={item.stock_id} menu={item} isFirst={index === 0} />
           ))
         ) : (
           <div>Loading menus...</div>
         )}
       </div>
-      {cart.length && <Carts carts={cart} />}
+      {/* {cart.length > 0 && <Carts carts={cart} />} */}
+
       <div className="flex justify-center">
-        <button className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full">
+        <button
+          onClick={() => navigate('/')}
+          className="fixed bottom-3 text-2xl max-w-sm font-bold w-[80%] self-center h-[40px] bg-white text-black border-2 border-primary rounded-full"
+        >
           주문 준비
         </button>
       </div>

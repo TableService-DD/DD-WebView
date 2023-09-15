@@ -8,6 +8,8 @@ import Order from './pages/Order.tsx';
 import FoodDetail from './pages/FoodDetail.tsx';
 import TmpDetail from './pages/TmpDetail.tsx';
 import FakeDetail from './pages/FakeDetail.tsx';
+import OrderList from './pages/OrderList.tsx';
+import FakeOrder from './pages/FakeOrder.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +27,7 @@ const router = createBrowserRouter([
       {
         path: 'order/:storeName/:tableNumber',
         element: (
-          <div className="max-w-lg mx-auto border-x-2 p-1">
+          <div className="max-w-lg mx-auto p-1">
             <Order />
           </div>
         ),
@@ -35,8 +37,16 @@ const router = createBrowserRouter([
         element: <FoodDetail />,
       },
       {
+        path: 'order_list/:storeName/:tableNumber',
+        element: <OrderList />,
+      },
+      {
         path: 'manage/order',
         element: <TmpDetail />,
+      },
+      {
+        path: 'fake/order',
+        element: <FakeOrder />,
       },
     ],
   },
