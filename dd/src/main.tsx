@@ -10,6 +10,7 @@ import TmpDetail from './pages/TmpDetail.tsx';
 import FakeDetail from './pages/FakeDetail.tsx';
 import OrderList from './pages/OrderList.tsx';
 import FakeOrder from './pages/FakeOrder.tsx';
+import CartList from './pages/CartList.tsx';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
       {
-        path: 'order/:storeName/:tableNumber',
+        path: 'stock/:storeName/:tableNumber',
         element: (
           <div className="max-w-lg mx-auto">
             <Order />
@@ -33,12 +34,16 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'order/:stock_id',
+        path: 'stock/:stock_id',
         element: <FoodDetail />,
       },
       {
-        path: 'order_list/:storeName/:tableNumber',
+        path: 'stock_list/:storeName/:tableNumber',
         element: <OrderList />,
+      },
+      {
+        path: 'cart_list/:storeName/:tableNumber',
+        element: <CartList />,
       },
       {
         path: 'manage/order',

@@ -71,7 +71,7 @@ export async function getDetailStocks(id: string): Promise<Stock | any> {
 
     const modifiedStock = {
       ...response.data.stocks[0],
-      stock_image: [`/images/menuImage/image1.png`],
+      stock_image: [`/images/menuImage/sample.png`],
     };
 
     console.log(modifiedStock);

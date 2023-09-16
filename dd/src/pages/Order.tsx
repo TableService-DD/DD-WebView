@@ -7,6 +7,7 @@ import MenuCard from '../components/MenuCard';
 import '../style/styles.css';
 import Carts from '../components/Carts';
 import { CartItem, getCarts } from '../api/carts';
+import CartItemBtn from '../components/CartItemBtn';
 function Order() {
   const navigate = useNavigate();
   const { storeName = 'Default Store', tableNumber = '0' } = useParams<{
@@ -57,7 +58,7 @@ function Order() {
       <div className="flex gap-5 px-5 overflow-x-scroll hide-scrollbar">
         {category.map((item: string, index: number) => (
           <button
-            className="relative w-full px-2 py-1 pb-2"
+            className="relative w-full px-2 pt-1 pb-3"
             onClick={() => setSelectedCategory(item)}
             key={index}
           >
@@ -74,7 +75,7 @@ function Order() {
 
       {/* <div className="w-full h-[2px] bg-primary" /> */}
 
-      <div className="flex flex-col gap-1 h-fit">
+      <div className="flex flex-col h-fit">
         {menuData ? (
           menuData.map((item: Stock, index: number) => (
             <MenuCard key={item.stock_id} menu={item} isFirst={index === 0} />
@@ -84,17 +85,12 @@ function Order() {
         )}
       </div>
       {/* {cart.length > 0 && <Carts carts={cart} />} */}
-      <div className="fixed bottom-0 w-full h-[90px] bg-white border-t-[1px] flex justify-center items-center rounded-t-xl">
-        <button className="w-[90%] bg-primary text-white h-[50px] rounded-md flex justify-between items-center px-[18px]">
-          <div className="basis-[25%]">
-            <span className="rounded-full bg-white text-sm semibold w-[25px] h-[25px] flex items-center justify-center text-primary flex-shrink-0 ">
-              1
-            </span>
-          </div>
-          <span className="semibold text-center">장바구니 보기</span>
-          <span className="medium flex-shrink-0 basis-[25%]">9000원</span>
-        </button>
-      </div>
+      <CartItemBtn
+        title="장바구니 보기"
+        price={9000}
+        quantity={1}
+        link={`/order_list/${storeName}/${tableNumber}`}
+      />
     </section>
   );
 }

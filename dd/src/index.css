@@ -77,6 +77,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  @apply tracking-tight;
 }
 body {
   font-family: 'Pretendard-Regular', sans-serif;
@@ -122,4 +123,9 @@ body {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+input[type='checkbox']:checked {
+  background-color: #ff5810;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3E%3Cpath d='M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z'/%3E%3C/svg%3E");
 }

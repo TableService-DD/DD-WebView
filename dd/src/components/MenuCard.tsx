@@ -10,7 +10,8 @@ function MenuCard({ menu, isFirst }: MenuCardProps) {
   return (
     <Link
       to={`/order/${menu.stock_id}`}
-      className={`flex items-center justify-between p-5 h-[129px] border-b-[0.4px] border-LineGray ${
+      style={{ borderBottom: '0.4px solid #E5E5E5' }}
+      className={`flex items-center justify-between p-5 border-LineGray ${
         isFirst ? 'border-t-[0.4px]' : ''
       }`}
     >
