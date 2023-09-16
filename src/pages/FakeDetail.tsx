@@ -1,16 +1,17 @@
-import Header from '../components/Header';
-import { Stock } from '../util/types';
+import Header from "../components/Header";
+import { Stock } from "../util/types";
 
 function FakeDetail() {
   const FakeMenu: Stock = {
-    store_code: 'FAKE_STORE_001',
-    stock_id: '1',
-    stock_name: '햄버거',
-    stock_price: '5000',
-    stock_description: '맛있는 햄버거',
+    store_code: "FAKE_STORE_001",
+    stock_category: "햄버거",
+    stock_id: "1",
+    stock_name: "햄버거",
+    stock_price: "5000",
+    stock_description: "맛있는 햄버거",
     stock_option: {
-      '토마토 추가': 500,
-      '치즈 추가': 700,
+      "토마토 추가": 500,
+      "치즈 추가": 700,
     },
     stock_image: [],
   };
@@ -18,7 +19,7 @@ function FakeDetail() {
     <section className="flex flex-col">
       <Header title="옵션" />
       <img
-        className="w-full object-contain h-[200px] border-2 "
+        className="w-full object-contain h-[200lx] border-2 "
         src={FakeMenu.stock_image[0]}
         alt={FakeMenu.stock_name}
       />

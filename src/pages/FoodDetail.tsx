@@ -1,12 +1,12 @@
-import { ReactElement, ReactNode, useEffect, useState } from 'react';
-import { getStocks, addStocksImage, getDetailStocks } from '../api/stocks';
-import Header from '../components/Header';
-import { IMAGE_URL } from '../api';
-import { Stock } from '../util/types';
-import { useParams } from 'react-router-dom';
-import OrderBtn from '../components/OrderBtn';
-import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { Category, FakeCategory } from '../static/FakeCategory';
+import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { getStocks, getDetailStocks } from "../api/stocks";
+import Header from "../components/Header";
+import { IMAGE_URL } from "../api";
+import { Stock } from "../util/types";
+import { useParams } from "react-router-dom";
+import OrderBtn from "../components/OrderBtn";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import { Category, FakeCategory } from "../static/FakeCategory";
 
 function FoodDetail() {
   const [stocks, setStocks] = useState<Stock | null>(null);
@@ -16,7 +16,7 @@ function FoodDetail() {
     storeName: string;
   }>();
 
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState("");
   useEffect(() => {
     const fetchStocks = async () => {
       if (stock_id) {
@@ -53,7 +53,7 @@ function FoodDetail() {
               <h2 className="text-xl semibold">{stocks.stock_name}</h2>
               <p className="text-sm text-textGray">
                 {stocks.stock_description} Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Modi, laboriosam.{' '}
+                consectetur adipisicing elit. Modi, laboriosam.{" "}
               </p>
             </div>
             <p className="flex justify-between items-center py-5 border-y-[0.4px] border-LineGray px-6">
@@ -72,7 +72,7 @@ function FoodDetail() {
                     type="radio"
                     name="option"
                     value="option1"
-                    checked={selectedOption === 'option1'}
+                    checked={selectedOption === "option1"}
                     onChange={(e) => setSelectedOption(e.target.value)}
                   />
                   <span className="ml-2">옵션 1</span>
@@ -82,7 +82,7 @@ function FoodDetail() {
                     type="radio"
                     name="option"
                     value="option2"
-                    checked={selectedOption === 'option2'}
+                    checked={selectedOption === "option2"}
                     onChange={(e) => setSelectedOption(e.target.value)}
                   />
                   <span className="ml-2">옵션 2</span>
@@ -130,7 +130,7 @@ function FoodDetail() {
             <OrderBtn
               title={`${stocks.stock_price.toLocaleString()}원 담기`}
               link={`/cart_list/${storeName}/${localStorage.getItem(
-                'tableNumber',
+                "tableNumber"
               )}`}
             />
           </div>
