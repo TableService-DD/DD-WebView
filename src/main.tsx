@@ -11,6 +11,8 @@ import OrderList from "./pages/OrderList.tsx";
 import FakeOrder from "./pages/FakeOrder.tsx";
 import CartList from "./pages/CartList.tsx";
 import SignUpPage from "./pages/SignUpPage.tsx";
+import TmpDetail from "./pages/TmpDetail.tsx";
+import PlayGround from "./pages/PlayGround.tsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,10 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "playground",
+        element: <PlayGround />,
+      },
+      {
         path: "store/:storeName/:stock_id",
         element: <FoodDetail />,
       },
@@ -49,10 +55,10 @@ const router = createBrowserRouter([
         path: "cart_list/:storeName/:tableNumber",
         element: <CartList />,
       },
-      // {
-      //   path: 'manage/order',
-      //   element: <TmpDetail />,
-      // },
+      {
+        path: "manage/order",
+        element: <TmpDetail />,
+      },
       // {
       //   path: 'fake/order',
       //   element: <FakeOrder />,

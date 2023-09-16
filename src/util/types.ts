@@ -33,6 +33,6 @@ export interface Stock {
   stock_price: string;
   stock_description: string;
   stock_option: { [key: string]: number } | null;
-  stock_image: string[];
+  stock_images: Blob | any;
   stock_category: string;
 }
