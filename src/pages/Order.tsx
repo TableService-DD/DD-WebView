@@ -14,7 +14,7 @@ function Order() {
     storeName?: string;
     tableNumber?: string;
   }>();
-  const [menuData, setMenuData] = useState<Stock[] | null>(null);
+  const [menuData, setMenuData] = useState<Stock[] | null>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("SET");
   const category: string[] = [
     "SET",
@@ -76,7 +76,7 @@ function Order() {
 
       {/* <div className="w-full h-[2px] bg-primary" /> */}
 
-      <div className="flex flex-col h-fit">
+      <div className="flex flex-col h-fit pb-[90px]">
         {menuData ? (
           menuData.map((item: Stock, index: number) => (
             <MenuCard
