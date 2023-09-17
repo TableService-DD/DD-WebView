@@ -20,7 +20,7 @@ function FakeDetail() {
       <Header title="옵션" />
       <img
         className="w-full object-contain h-[200lx] border-2 "
-        src={FakeMenu.stock_image[0]}
+        src={FakeMenu.stock_images[0]}
         alt={FakeMenu.stock_name}
       />
       <div className="px-5 flex flex-col gap-1 bg-menuSection p-3 ">
