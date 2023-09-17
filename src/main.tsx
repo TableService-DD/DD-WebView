@@ -6,12 +6,10 @@ import Home from "./pages/Home.tsx";
 import LoginPage from "./pages/LoginPage.tsx";
 import Order from "./pages/Order.tsx";
 import FoodDetail from "./pages/FoodDetail.tsx";
-import FakeDetail from "./pages/FakeDetail.tsx";
 import OrderList from "./pages/OrderList.tsx";
 import FakeOrder from "./pages/FakeOrder.tsx";
 import CartList from "./pages/CartList.tsx";
 import SignUpPage from "./pages/SignUpPage.tsx";
-import TmpDetail from "./pages/TmpDetail.tsx";
 import PlayGround from "./pages/PlayGround.tsx";
 
 const router = createBrowserRouter([
