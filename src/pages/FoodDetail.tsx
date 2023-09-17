@@ -40,12 +40,12 @@ function FoodDetail() {
 
   return (
     <section>
-      <Header title="등촌 칼국수" />
+      <Header title={storeName} />
       {stocks && (
         <div key={stock_id} className="flex flex-col pb-6 bg-menuSection ">
           <img
             className="w-full h-[200px] object-cover"
-            src={stocks.stock_image[0]}
+            src={stocks.stock_images[0]}
             alt={stocks.stock_name}
           />
           <div className="flex flex-col pb-[90px]">

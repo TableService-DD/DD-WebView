@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
-import { Stock } from '../util/types';
+import { Link } from "react-router-dom";
+import { Stock } from "../util/types";
+import { IMAGE_URL } from "../api";
 
 interface MenuCardProps {
   menu: Stock;
@@ -11,9 +12,9 @@ function MenuCard({ menu, isFirst, store_name }: MenuCardProps) {
   return (
     <Link
       to={`/store/${store_name}/${menu.stock_id}`}
-      style={{ borderBottom: '0.4px solid #E5E5E5' }}
+      style={{ borderBottom: "0.4px solid #E5E5E5" }}
       className={`flex items-center justify-between p-5 border-LineGray ${
-        isFirst ? 'border-t-[0.4px]' : ''
+        isFirst ? "border-t-[0.4px]" : ""
       }`}
     >
       <div className="flex flex-col items-start gap-[9px]">
@@ -26,7 +27,7 @@ function MenuCard({ menu, isFirst, store_name }: MenuCardProps) {
       </div>
       <img
         className="w-[80px] h-[80px] object-cover rounded-md"
-        src={menu.stock_image[0]}
+        src={`${IMAGE_URL}${menu.stock_images[0]}`}
         alt={menu.stock_name}
       />
     </Link>
