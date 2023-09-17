@@ -1,7 +1,7 @@
-import axios from 'axios';
-import { BASE_URL } from '.';
-import apiInstance from './apiInstance';
-import { STORE_CODE } from './stocks';
+import axios from "axios";
+import { BASE_URL } from ".";
+import apiInstance from "./apiInstance";
+import { STORE_CODE } from "./stocks";
 
 export type OptionItem = {
   [key: string]: {

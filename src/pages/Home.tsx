@@ -1,5 +1,17 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 function Home() {
-  return <div className="bg-orange-400 p-4">Home</div>;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/login");
+  }, [navigate]);
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
 }
 
 export default Home;

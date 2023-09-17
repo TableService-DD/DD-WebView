@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { HashLoader } from 'react-spinners';
-import { UserInfo, getLogin } from '../api/auth';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { HashLoader } from "react-spinners";
+import { UserInfo, getLogin, signUp } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [userInfo, setUserInfo] = useState<UserInfo>({ id: '', pw: '' });
+  const [userInfo, setUserInfo] = useState<UserInfo>({ id: "", pw: "" });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,11 +23,11 @@ function LoginPage() {
     setIsLoading(false);
 
     if (tokens) {
-      const storeName = 'Starbucks';
-      const tableNumber = '1';
-      navigate(`/order/${storeName}/${tableNumber}`);
+      const storeName = "Starbucks";
+      const tableNumber = "1";
+      navigate(`/stock/${storeName}/${tableNumber}`);
     } else {
-      alert('Login Failed');
+      alert("Login Failed");
     }
   };
 
@@ -36,7 +36,7 @@ function LoginPage() {
       {isLoading ? (
         <div className="absolute z-10 w-3/4 h-[60%] gap-4 p-4 pb-2 bg-white ring-gray-400 ring-4 shadow-md flex flex-col items-center justify-around rounded-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[20%]">
           <h1 className="text-primary text-3xl font-bold">로딩 중...</h1>
-          <HashLoader size={100} color={'#FF6A00'} loading={true} />
+          <HashLoader size={100} color={"#FF6A00"} loading={true} />
           <button
             className="bg-gray-500 text-white p-2  w-full px-6 rounded-md"
             onClick={() => setIsLoading(false)}

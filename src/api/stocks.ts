@@ -1,8 +1,8 @@
 import axios from "axios";
-import { BASE_URL } from ".";
+import { BASE_URL, IMAGE_URL } from ".";
 import { Menu, Stock } from "../util/types";
 import apiInstance from "./apiInstance";
-export const STORE_CODE = "2B5YG1OHDU9SZTJM7WCXQLEV";
+export const STORE_CODE = "F1MWOBU2LSVHA9JPDZXER6C4";
 
 const items: Stock = {
   store_code: STORE_CODE,
@@ -12,7 +12,7 @@ const items: Stock = {
   stock_price: "1000",
   stock_description: "테스트메뉴입니다.",
   stock_option: null,
-  stock_image: [],
+  stock_images: [],
 };
 
 // export async function getStocks(): Promise<Stock[] | boolean> {
@@ -43,40 +43,55 @@ const items: Stock = {
 //     return error;
 //   }
 // }
+
+export const TMPID = "P3IMZKGCY4UFEL1DJBWQ8R2N";
 export async function getStocks(): Promise<Stock[] | any> {
   try {
     const response = await axios.get(
       `${BASE_URL}/stocks/list?store_code=${STORE_CODE}`
     );
-
-    const modifiedStocks = response.data.stocks.map((stock: Stock) => {
-      return {
-        ...stock,
-        stock_image: [`/images/menuImage/image1.png`],
-      };
-    });
-
-    console.log(modifiedStocks);
-    return modifiedStocks;
+    console.log(response.data.stocks);
+    return response.data.stocks;
   } catch (error) {
     console.error(error);
     return error;
   }
 }
 
+// export async function getDetailStocks(id: string): Promise<Stock | any> {
+//   try {
+//     const response = await axios.get(
+//       `${BASE_URL}/stocks/list?store_code=${STORE_CODE}&stock_id=${id}`
+//     );
+
+//     const modifiedStock = {
+//       ...response.data.stocks[0],
+//       stock_image: [`/images/menuImage/sample.png`],
+//     };
+
+//     console.log(modifiedStock);
+//     return modifiedStock;
+//   } catch (error) {
+//     console.error(error);
+//     return error;
+//   }
+// }
+
 export async function getDetailStocks(id: string): Promise<Stock | any> {
   try {
     const response = await axios.get(
       `${BASE_URL}/stocks/list?store_code=${STORE_CODE}&stock_id=${id}`
     );
+    const stock = response.data.stocks[0];
 
-    const modifiedStock = {
-      ...response.data.stocks[0],
-      stock_image: [`/images/menuImage/sample.png`],
-    };
+    if (stock && stock.stock_images && Array.isArray(stock.stock_images)) {
+      stock.stock_images = stock.stock_images.map(
+        (image: string) => `${IMAGE_URL}${image}`
+      );
+    }
 
-    console.log(modifiedStock);
-    return modifiedStock;
+    console.log(stock);
+    return stock;
   } catch (error) {
     console.error(error);
     return error;
@@ -100,7 +115,10 @@ export async function getDetailStocks(id: string): Promise<Stock | any> {
 
 export async function addStocks(items: Stock): Promise<boolean> {
   try {
-    const response = await apiInstance.post(`${BASE_URL}/stocks/add`, items);
+    const response = await apiInstance.post(
+      `${BASE_URL}/stocks/add/temp`,
+      items
+    );
     console.log(response);
     return true;
   } catch (error) {
@@ -116,8 +134,8 @@ export async function addStocks(items: Stock): Promise<boolean> {
 //     formData.append(`stock_images`, image.get("image"));
 //   });
 
-//   formData.append("store_code", STORE_CODE);
-//   formData.append("stock_id", "0IFUHLZKGET9RX8DMCJYWV5Q");
+//   formData.append("store_code", F1MWOBU2LSVHA9JPDZXER6C4);
+//   formData.append("stock_id", "");
 
 //   try {
 //     const response = await apiInstance.post(`/stocks/add/image`, formData);
