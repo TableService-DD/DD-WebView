@@ -12,7 +12,7 @@ const items: Stock = {
   stock_price: "1000",
   stock_description: "테스트메뉴입니다.",
   stock_option: null,
-  stock_image: [],
+  stock_images: [],
 };
 
 // export async function getStocks(): Promise<Stock[] | boolean> {

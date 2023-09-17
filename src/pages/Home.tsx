@@ -5,8 +5,13 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/stock/login");
+    navigate("/login");
   }, [navigate]);
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
 }
 
 export default Home;

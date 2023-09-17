@@ -55,10 +55,10 @@ const router = createBrowserRouter([
         path: "cart_list/:storeName/:tableNumber",
         element: <CartList />,
       },
-      {
-        path: "manage/order",
-        element: <TmpDetail />,
-      },
+      // {
+      //   path: "manage/order",
+      //   element: <TmpDetail />,
+      // },
       // {
       //   path: 'fake/order',
       //   element: <FakeOrder />,
