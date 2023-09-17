@@ -8,10 +8,10 @@ import Order from "./pages/Order.tsx";
 import FoodDetail from "./pages/FoodDetail.tsx";
 import FakeDetail from "./pages/FakeDetail.tsx";
 import OrderList from "./pages/OrderList.tsx";
-import FakeOrder from "./pages/FakeOrder.tsx";
+// import FakeOrder from "./pages/FakeOrder.tsx";
 import CartList from "./pages/CartList.tsx";
 import SignUpPage from "./pages/SignUpPage.tsx";
-import TmpDetail from "./pages/TmpDetail.tsx";
+// import TmpDetail from "./pages/TmpDetail.tsx";
 import PlayGround from "./pages/PlayGround.tsx";
 import { PrivateRoute } from "./hooks/PrivateRoute.tsx";
 
@@ -70,18 +70,18 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: "manage/order",
-        element: (
-          <PrivateRoute>
-            <TmpDetail />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "fake/order",
-        element: <FakeOrder />,
-      },
+      // {
+      //   path: "manage/order",
+      //   element: (
+      //     <PrivateRoute>
+      //       <TmpDetail />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "fake/order",
+      //   element: <FakeOrder />,
+      // },
     ],
   },
 ]);
