@@ -41,39 +41,35 @@ export async function getLogin(userInfo: UserInfo): Promise<boolean> {
     return false;
   }
 }
-// export async function signUp(userInfo: SignupInfo): Promise<boolean> {
-//   try {
-//     const response = await axios.post(`${BASE_URL}/user/signup`, userInfo);
-//     console.log("SignUp Success:", response.data);
-//     // localStorage.setItem("access_token", response.data.data.access_token);
-//     // localStorage.setItem("refresh_token", response.data.data.refresh_token);
-//     return true;
-//   } catch (error: unknown) {
-//     console.error("SignUp Error:", error);
-//     return false;
-//   }
-// }
-export async function signUp(): Promise<boolean> {
-  const userInfo: SignupInfo = {
-    user_name: "testman",
-    user_id: "testuser",
-    user_pw: "a123",
-    user_email: "bishoe01@kakao.com",
-    user_type: 1,
-    user_phone: "01012341234",
-    is_valid: true,
-  };
+export async function signUp(userInfo: SignupInfo): Promise<boolean> {
   try {
     const response = await axios.post(`${BASE_URL}/user/register`, userInfo);
     console.log("SignUp Success:", response.data);
-    // localStorage.setItem("access_token", response.data.data.access_token);
-    // localStorage.setItem("refresh_token", response.data.data.refresh_token);
     return true;
   } catch (error: unknown) {
     console.error("SignUp Error:", error);
     return false;
   }
 }
+// export async function signUp(): Promise<boolean> {
+//   const userInfo: SignupInfo = {
+//     user_name: "testman",
+//     user_id: "testuser",
+//     user_pw: "a123",
+//     user_email: "bishoe01@kakao.com",
+//     user_type: 1,
+//     user_phone: "01012341234",
+//     is_valid: true,
+//   };
+//   try {
+//     const response = await axios.post(`${BASE_URL}/user/register`, userInfo);
+//     console.log("SignUp Success:", response.data);
+//     return true;
+//   } catch (error: unknown) {
+//     console.error("SignUp Error:", error);
+//     return false;
+//   }
+// }
 
 export async function getRefresh(): Promise<boolean> {
   try {
