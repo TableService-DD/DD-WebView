@@ -1,5 +1,16 @@
 
+<<<<<<< Updated upstream
 #node modules ignore
 node_modules
 #bower components ignore
+=======
+
+# npm
+npm-debug.log
+npm-debug.log.*
+```
+#node modules
+node_modules
+```
+>>>>>>> Stashed changes
 
