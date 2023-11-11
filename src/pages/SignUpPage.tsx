@@ -1,143 +1,77 @@
-import React, { useState } from "react";
-import { SignupInfo, signUp } from "../api/auth";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { SignupInfo, sendPhoneCertRequest, signUp } from '../api/auth';
 
-function SignUpPage() {
-  const [signupInfo, setSignupInfo] = useState<Partial<SignupInfo>>({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [isEmailValid, setIsEmailValid] = useState(true); // 추가된 상태 변수
+type Props = {};
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setSignupInfo((prev) => ({ ...prev, [name]: value }));
+function SignupForm({}: Props) {
+  const { register, handleSubmit, formState: { errors } } = useForm<SignupInfo>();
+  const [phone, setPhone] = useState('');
 
-    if (name === "user_email") {
-      validateEmail(value); // 이메일 변경시 유효성 검사
-    }
-  };
-
-  const validateEmail = (email: string) => {
-    // 간단한 이메일 유효성 검사 정규 표현식
-    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    setIsEmailValid(regex.test(email));
-  };
-  const allFieldsFilled = () => {
-    return (
-      signupInfo.user_name &&
-      signupInfo.user_id &&
-      signupInfo.user_pw &&
-      signupInfo.user_email &&
-      signupInfo.user_phone
-    );
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log("Submitted Information:", signupInfo);
-    setIsLoading(true);
-
-    const success = await signUp(signupInfo as SignupInfo);
-    setIsLoading(false);
-
+  const onSubmit = async (data: SignupInfo) => {
+    const success = await signUp(data);
     if (success) {
-      alert("Successfully signed up!");
+      console.log('회원가입 성공');
+      // 회원가입 성공 시 추가 로직
     } else {
-      alert("Sign up failed. Please try again.");
+      console.error('회원가입 실패');
+      // 회원가입 실패 시 추가 로직
     }
+  };
+
+  const handlePhoneCertRequest = () => {
+    sendPhoneCertRequest(phone)
+      .then(() => {
+        console.log('휴대폰 인증 요청 성공');
+        // 휴대폰 인증 요청 성공 시 추가 로직
+      })
+      .catch(error => {
+        console.error('휴대폰 인증 요청 실패', error);
+        // 휴대폰 인증 요청 실패 시 추가 로직
+      });
   };
 
   return (
-    <div className="signup-page bg-gray-100 h-screen flex items-start justify-center">
-      <div className="bg-white p-8 rounded-xl shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">SignUp</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600 mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              name="user_name"
-              placeholder="Name"
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600 mb-2">
-              User ID
-            </label>
-            <input
-              type="text"
-              name="user_id"
-              placeholder="User ID"
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600 mb-2">
-              Password
-            </label>
-            <input
-              type="password"
-              name="user_pw"
-              placeholder="Password"
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600 mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              name="user_email"
-              placeholder="Email"
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-            />
-            {!isEmailValid && (
-              <span className="text-primary text-sm">
-                이메일 형식에 맞게 입력해주세요
-              </span>
-            )}
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-600 mb-2">
-              Phone Number
-            </label>
-            <input
-              type="text"
-              name="user_phone"
-              placeholder="Phone Number"
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <button
-              type="submit"
-              className={`w-full p-2 rounded-md ${
-                allFieldsFilled()
-                  ? "bg-primary text-white"
-                  : "bg-grayLight text-white"
-              }`}
-              disabled={!allFieldsFilled() || isLoading}
-            >
-              Sign Up
-            </button>
-          </div>
-        </form>
+    <form onSubmit={handleSubmit(onSubmit)} className="p-4">
+      {/* Name, Email, Password 입력 필드 */}
+      {/* ... */}
+
+      <div className="mb-4">
+        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
+        <div className="flex gap-2">
+          <input
+            type="tel"
+            id="phone"
+            className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+            value={phone}
+            onChange={e => setPhone(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={handlePhoneCertRequest}
+            className="px-4 py-2 bg-primary text-white rounded-md"
+          >
+            인증 요청
+          </button>
+        </div>
       </div>
-    </div>
+
+      <div className="mb-4">
+        <label htmlFor="phone_cert_id" className="block text-sm font-medium text-gray-700">Phone Certification ID</label>
+        <input
+          {...register("phone_cert_id", { required: true })}
+          type="number"
+          id="phone_cert_id"
+          className="mt-1 focus:ring-primary focus:border-primary block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        />
+        {errors.phone_cert_id && <span className="text-red-500">Phone certification ID is required</span>}
+      </div>
+
+      <button type="submit" className="w-full px-4 py-2 bg-primary text-white rounded-md">
+        Sign Up
+      </button>
+    </form>
   );
 }
 
-export default SignUpPage;
+export default SignupForm;
