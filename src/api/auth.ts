@@ -1,18 +1,15 @@
 import axios from "axios";
 import { BASE_URL } from ".";
 export interface UserInfo {
-  id: string;
-  pw: string;
+  email: string;
+  password: string;
 }
 
 export interface SignupInfo {
-  user_name: string;
-  user_id: string;
-  user_pw: string;
-  user_email: string;
-  user_type: number;
-  user_phone: string;
-  is_valid: boolean;
+  name: string;
+  email: string;
+  password: string;
+  phone_cert_id: number;
 }
 export interface Tokens {
   access_token: string;
@@ -20,10 +17,12 @@ export interface Tokens {
 }
 export async function getLogin(userInfo: UserInfo): Promise<boolean> {
   try {
-    const response = await axios.get(`${BASE_URL}/user/login`, {
-      params: userInfo,
+    console.log(userInfo);
+    const response = await axios.post(`${BASE_URL}/biz/user`, {
+      userInfo
+      
     });
-
+    
     if (
       response.status === 200 &&
       response.data &&
@@ -43,7 +42,12 @@ export async function getLogin(userInfo: UserInfo): Promise<boolean> {
 }
 export async function signUp(userInfo: SignupInfo): Promise<boolean> {
   try {
-    const response = await axios.post(`${BASE_URL}/user/register`, userInfo);
+    const response = await axios.put(`${BASE_URL}/biz/user/`, {
+      name: "정종문 ",
+      email: "bishoe01@hanyang.ac.kr",
+      password: "abcd1234",
+      phone_cert_id: 2,
+    });
     console.log("SignUp Success:", response.data);
     return true;
   } catch (error: unknown) {

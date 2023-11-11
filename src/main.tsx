@@ -14,6 +14,7 @@ import SignUpPage from "./pages/SignUpPage.tsx";
 import TmpDetail from "./pages/TmpDetail.tsx";
 import PlayGround from "./pages/PlayGround.tsx";
 import { PrivateRoute } from "./hooks/PrivateRoute.tsx";
+import SignupForm from "./pages/SignupForm.tsx";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "signup",
-        element: <SignUpPage />,
+        element: <SignupForm />,
       },
       {
         path: "stock/:storeName/:tableNumber",

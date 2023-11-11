@@ -4,7 +4,7 @@ import { UserInfo, getLogin, signUp } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [userInfo, setUserInfo] = useState<UserInfo>({ id: "", pw: "" });
+  const [userInfo, setUserInfo] = useState<UserInfo>({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +33,20 @@ function LoginPage() {
 
   return (
     <section className="px-8 py-12 flex flex-col gap-4 relative">
+      <button
+        className="bg-sky-400 text-white p-2 w-[200px] rounded-full
+      "
+        onClick={() =>
+          signUp({
+            name: "test",
+            email: "test",
+            password: "test",
+            phone_cert_id: 2,
+          })
+        }
+      >
+        TESTBTN
+      </button>
       {isLoading ? (
         <div className="absolute z-10 w-3/4 h-[60%] gap-4 p-4 pb-2 bg-white ring-gray-400 ring-4 shadow-md flex flex-col items-center justify-around rounded-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[20%]">
           <h1 className="text-primary text-3xl font-bold">로딩 중...</h1>
@@ -59,10 +73,10 @@ function LoginPage() {
           </label>
           <input
             type="text"
-            id="id"
-            name="id"
+            id="email"
+            name="email"
             className="border-b-2 px-3 py-1 focus:outline-transparent"
-            value={userInfo.id}
+            value={userInfo.email}
             onChange={handleChange}
           />
         </div>
@@ -72,10 +86,10 @@ function LoginPage() {
           </label>
           <input
             type="password"
-            id="pw"
-            name="pw"
+            id="password"
+            name="password"
             className="border-b-2 px-3 py-1 focus:outline-transparent"
-            value={userInfo.pw}
+            value={userInfo.password}
             onChange={handleChange}
           />
         </div>

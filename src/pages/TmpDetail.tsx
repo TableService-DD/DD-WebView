@@ -48,32 +48,6 @@ function TmpDetail() {
     handleOptionChange(value);
   };
 
-  const handleSubmit = async () => {
-    if (stockData) {
-      const formData = new FormData();
-      Object.keys(stockData).forEach((key) => {
-        const value = stockData[key as keyof Stock];
-        if (key === "stock_option" && value) {
-          formData.append(key, JSON.stringify(value));
-        } else if (key !== "stock_images" && value) {
-          formData.append(key, value.toString());
-        }
-      });
-
-      if (selectedImage) {
-        formData.append("stock_images", selectedImage);
-      }
-
-      const success = await addStocks(formData);
-      if (success) {
-        alert("Stock added");
-      } else {
-        alert("Error adding stock!");
-        console.log(formData);
-      }
-    }
-  };
-
   return (
     <section className="p-4 bg-gray-100 min-h-screen">
       <div className="form-container max-w-xl mx-auto bg-white p-6 shadow-md rounded-md">
