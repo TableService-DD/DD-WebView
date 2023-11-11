@@ -9,8 +9,17 @@ export interface SignupInfo {
   name: string;
   email: string;
   password: string;
-  phone_cert_id: number;
+  phone_cert_id?: number; // 'number | undefined'와 동일
 }
+
+export interface SignupFormInfo {
+  name: string;
+  email: string;
+  password: string;
+  phone_cert_id?: number;
+}
+
+
 export interface Tokens {
   access_token: string;
   refresh_token: string;
@@ -48,22 +57,18 @@ export async function signUp(userInfo: SignupInfo): Promise<boolean> {
   }
 }
 
-export function sendPhoneCertRequest(phoneNumber: string): Promise<void> {
-  const requestData: PhoneCertRequest = {
-    phone_number: phoneNumber,
-  };
-  console.log('Request:', requestData);
-  return axios.put(`${BASE_URL}/cert/phone/sms`, 
-  {
-    phone_number: phoneNumber,
-  })
-  .then(response => {
-    console.log('Response:', response.data);
-  })
-  .catch(error => {
-    console.error('Error sending phone certification request:', error);
-  });
+export function sendPhoneCertRequest(phoneNumber: string): Promise<any> {
+  return axios.put(`${BASE_URL}/cert/phone/sms`, { phone_number: phoneNumber })
+    .then(response => {
+      console.log('Response:', response.data);
+      return response.data; // 서버 응답 반환
+    })
+    .catch(error => {
+      console.error('Error sending phone certification request:', error);
+      throw error; // 오류를 다시 던져서 호출자가 처리할 수 있도록 함
+    });
 }
+
 export function verifyPhoneCertification(
   phoneNumber: string, 
   certificationCode: string
