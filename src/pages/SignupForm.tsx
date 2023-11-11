@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { SignupFormInfo, SignupInfo, sendPhoneCertRequest, signUp, verifyPhoneCertification } from '../api/auth';
+import { AnimatePresence, motion} from 'framer-motion';
+import {pageTransitionVariants} from '../util/animation';
 
 function SignupForm() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<SignupFormInfo>();
@@ -10,6 +12,11 @@ function SignupForm() {
   const [phoneCertId, setPhoneCertId] = useState<number | undefined>();
   const [isPhoneCertVerified, setIsPhoneCertVerified] = useState(false);
   const [isPhoneCertRequested, setIsPhoneCertRequested] = useState(false);
+  const [[page, direction], setPage] = useState([0, 0]);
+  const paginate = (newPage) => {
+    const direction = newPage > currentPage ? 1 : -1;
+    setPage([newPage, direction]);
+  };
   // 타이머 관련 상태
   const [timer, setTimer] = useState(0);
   const [timerActive, setTimerActive] = useState(false);
@@ -222,14 +229,30 @@ function SignupForm() {
   // 인증 성공 후 페이지 전환
   useEffect(() => {
     if (isPhoneCertVerified) {
-      setCurrentPage(1);
+      paginate(1);
     }
   }, [isPhoneCertVerified]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="p-4">
-      {currentPage === 0 ? renderPhoneVerificationPage() : renderSignupPage()}
-    </form>
+    <AnimatePresence initial={false} custom={direction}>
+      <form onSubmit={handleSubmit(onSubmit)} className="p-4 bg-gray-100 min-h-screen">
+        <motion.div
+          key={page}
+          custom={direction}
+          variants={pageTransitionVariants}
+          initial="enter"
+          animate="center"
+          exit="exit"
+          className='p-4'
+          transition={{
+            x: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.2 }
+          }}
+        >
+          {page === 0 ? renderPhoneVerificationPage() : renderSignupPage()}
+        </motion.div>
+        </form>
+      </AnimatePresence>
   );
 }
 
