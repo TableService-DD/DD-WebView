@@ -1,30 +1,39 @@
 import axios from 'axios';
-import { getRefresh } from './auth';
 import { BASE_URL } from '.';
 
-const apiInstance = axios.create({
+export const apiInstance = axios.create({
   baseURL: BASE_URL,
-  headers: {
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-  },
+});
+apiInstance.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("token");
+  if (token) {
+    console.log(`token : ${token}`);
+    config.headers["Authorization"] = `Bearer ${token}`;
+  }
+  return config;
 });
 
 apiInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.status === 404) {
+    }
+    return response;
+  },
   async (error) => {
-    const originalRequest = error.config;
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      const isRefreshed = await getRefresh();
-      if (isRefreshed) {
-        apiInstance.defaults.headers[
-          'Authorization'
-        ] = `Bearer ${localStorage.getItem('access_token')}`;
-        return apiInstance(originalRequest);
+    if (error.response && error.response.status === 401) {
+      const refresh_token = sessionStorage.getItem("refresh_token");
+      try {
+        const { data } = await axios.post(`${BASE_URL}/user/jwt/refresh`, {
+          refresh_token: refresh_token,
+        });
+        sessionStorage.setItem("token", data.access_token);
+        error.config.headers["Authorization"] = `Bearer ${data.access_token}`;
+        return apiInstance.request(error.config);
+      } catch (refreshError) {
+        // 사용자 로그아웃 또는 에러 처리 필요함
       }
     }
     return Promise.reject(error);
-  },
+  }
 );
 
-export default apiInstance;

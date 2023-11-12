@@ -89,32 +89,56 @@ export function verifyPhoneCertification(
     });
 }
 
-
 export async function getLogin(userInfo: UserInfo): Promise<boolean> {
   try {
-    console.log(userInfo);
-    const response = await axios.post(`${BASE_URL}/biz/user`, {
-      userInfo
-      
+    const response = await axios.post(`${BASE_URL}/biz/user/`, {
+      email: userInfo.email,
+      password: userInfo.password,
     });
     
-    if (
-      response.status === 200 &&
-      response.data &&
-      response.data.data &&
-      "access_token" in response.data.data
-    ) {
+    if (response.status === 200 && response.data && "access_token" in response.data) {
       console.log("Login Success:", response.data);
-      localStorage.setItem("access_token", response.data.data.access_token);
-      localStorage.setItem("refresh_token", response.data.data.refresh_token);
+      sessionStorage.setItem("access_token", response.data.access_token);
+      sessionStorage.setItem("refresh_token", response.data.refresh_token);
       return true;
     }
     return false;
   } catch (error: unknown) {
-    console.error("Login Error:", error);
+    if (axios.isAxiosError(error) && error.response) {
+      // 서버에서 반환한 오류를 처리
+      console.error("Login Error:", error.response.data);
+    } else {
+      // 네트워크 오류나 기타 예외 상황 처리
+      console.error("Login Error:", error);
+    }
     return false;
   }
 }
+
+// export async function getLogin(userInfo: UserInfo): Promise<boolean> {
+//   try {
+//     const response = await axios.post(`${BASE_URL}/biz/user/`, {
+//       email: userInfo.email,
+//       password: userInfo.password,
+//     }, { withCredentials: true }); // withCredentials 옵션 추가
+
+//     if (response.status === 200 && response.data) {
+//       console.log("Login Success:", response.data);
+//       // 로컬 스토리지에 토큰 저장하는 부분 제거
+//       return true;
+//     }
+//     return false;
+//   } catch (error: unknown) {
+//     if (axios.isAxiosError(error) && error.response) {
+//       console.error("Login Error:", error.response.data);
+//     } else {
+//       console.error("Login Error:", error);
+//     }
+//     return false;
+//   }
+// }
+
+
 
 
 export async function getRefresh(): Promise<boolean> {

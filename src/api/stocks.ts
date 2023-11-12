@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL, IMAGE_URL } from ".";
 import { Menu, Stock } from "../util/types";
-import apiInstance from "./apiInstance";
+import { apiInstance } from "./apiInstance";
 export const STORE_CODE = "F1MWOBU2LSVHA9JPDZXER6C4";
 
 const items: Stock = {

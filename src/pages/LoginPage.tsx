@@ -18,18 +18,21 @@ function LoginPage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
-    const tokens = await getLogin(userInfo);
-
-    setIsLoading(false);
-
-    if (tokens) {
-      const storeName = "Starbucks";
-      const tableNumber = "1";
-      navigate(`/stock/${storeName}/${tableNumber}`);
-    } else {
-      alert("Login Failed");
+  
+    try {
+      const loginSuccess = await getLogin(userInfo);
+      if (loginSuccess) {
+        console.log("Login successful");
+      } else {
+        console.log("Login failed: Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
+  
 
   return (
     <section className="px-8 py-12 flex flex-col gap-4 relative">
@@ -61,15 +64,15 @@ function LoginPage() {
       ) : null}
 
       <div className="flex flex-col mb-4">
-        <h1 className="text-3xl font-bold mb-1">DDING DDONG</h1>
+        <h1 className="text-3xl font-bold mb-1">Mr.Qr</h1>
         <span className="text-md text-gray-400">
-          Please enter your ID and Password
+          이메일과 비밀번호를 입력해주세요.
         </span>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-col my-4 gap-2">
         <div className="flex flex-col mb-2">
           <label htmlFor="id" className="text-gray-400 text-md text-start">
-            ID
+            이메일
           </label>
           <input
             type="text"
@@ -82,7 +85,7 @@ function LoginPage() {
         </div>
         <div className="flex flex-col mb-2">
           <label htmlFor="pw" className="text-gray-400 text-md text-start">
-            Password
+            비밀번호
           </label>
           <input
             type="password"
@@ -95,9 +98,9 @@ function LoginPage() {
         </div>
         <button
           type="submit"
-          className="w-full p-2 bg-primary text-white rounded-md mt-4"
+          className="w-full p-2 bg-primary text-white rounded-full mt-4"
         >
-          Log In
+          로그인
         </button>
       </form>
     </section>
