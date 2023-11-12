@@ -5,7 +5,7 @@ export const apiInstance = axios.create({
   baseURL: BASE_URL,
 });
 apiInstance.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem("token");
+  const token = sessionStorage.getItem("access_token");
   if (token) {
     console.log(`token : ${token}`);
     config.headers["Authorization"] = `Bearer ${token}`;
@@ -26,7 +26,7 @@ apiInstance.interceptors.response.use(
         const { data } = await axios.post(`${BASE_URL}/user/jwt/refresh`, {
           refresh_token: refresh_token,
         });
-        sessionStorage.setItem("token", data.access_token);
+        sessionStorage.setItem("access_token", data.access_token);
         error.config.headers["Authorization"] = `Bearer ${data.access_token}`;
         return apiInstance.request(error.config);
       } catch (refreshError) {

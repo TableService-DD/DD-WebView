@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function useIsAuthenticated(): boolean {
-  const accessToken = localStorage.getItem("access_token");
+  const accessToken = sessionStorage.getItem("access_token");
   return !!accessToken;
 }
 

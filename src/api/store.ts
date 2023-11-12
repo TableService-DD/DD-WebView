@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from ".";
-import apiInstance from "./apiInstance";
 import { STORE_CODE } from "./stocks";
+import { apiInstance } from "./apiInstance";
 
 export interface Store {
   store_code: string;
@@ -19,6 +19,9 @@ export async function getStoreList(): Promise<Store[] | boolean> {
     return false;
   }
 }
+
+
+
 
 // export async function addStore(store: Store): Promise<boolean> {
 //   try {
@@ -64,3 +67,36 @@ export async function updateStore(store: Store): Promise<boolean> {
     return false;
   }
 }
+
+
+export const updateStoreInfo = async (bizRegPaperFile: File, bizBankAccountPaperFile: File) => {
+  const formData = new FormData();
+
+  // 파일을 FormData 객체에 추가
+  formData.append('biz-reg-paper', bizRegPaperFile);
+  formData.append('biz-bank-account-paper', bizBankAccountPaperFile);
+
+  // JSON 데이터를 문자열로 변환하여 FormData에 추가
+  const jsonData = JSON.stringify({
+    ceo_name: "kevin",
+    name: "미스터큐알본점",
+    biz_reg_number: "7195600409",
+    start_date: "20190814",
+    administrative_division_id: 1,
+    other_address: "상록구 한양대학로 55",
+    postal_code: "15588",
+    gps_latitude: 1.000000,
+    gps_longitude: 1.000000,
+    bank_id: 1,
+    bank_account: "110598180721"
+  });
+  formData.append('data', jsonData);
+
+  // 요청 전송 시도
+  try {
+    const response = await apiInstance.put(`${BASE_URL}/biz/store/my/info`, formData);
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
