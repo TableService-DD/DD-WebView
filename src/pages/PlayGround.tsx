@@ -4,20 +4,20 @@ import { TMPID, getDetailStocks } from "../api/stocks"; // 경로에 따라 적�
 function PlayGround() {
   const [stockImage, setStockImage] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchStockDetail = async () => {
-      const stockData = await getDetailStocks(TMPID);
-      if (
-        stockData &&
-        stockData.stock_images &&
-        stockData.stock_images.length > 0
-      ) {
-        setStockImage(stockData.stock_images[0]);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchStockDetail = async () => {
+  //     const stockData = await getDetailStocks(TMPID);
+  //     if (
+  //       stockData &&
+  //       stockData.stock_images &&
+  //       stockData.stock_images.length > 0
+  //     ) {
+  //       setStockImage(stockData.stock_images[0]);
+  //     }
+  //   };
 
-    fetchStockDetail();
-  }, []);
+  //   fetchStockDetail();
+  // }, []);
 
   return (
     <div>

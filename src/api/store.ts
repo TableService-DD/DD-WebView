@@ -1,6 +1,5 @@
 import axios from "axios";
 import { BASE_URL } from ".";
-import { STORE_CODE } from "./stocks";
 import { apiInstance } from "./apiInstance";
 
 export interface Store {
