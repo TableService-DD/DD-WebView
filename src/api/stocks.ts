@@ -1,19 +1,10 @@
 import axios from "axios";
 import { BASE_URL, IMAGE_URL } from ".";
-import { Menu, Stock } from "../util/types";
+import { Menu, Stock, StockCategory } from '../util/types';
 import { apiInstance } from "./apiInstance";
 export const STORE_CODE = "F1MWOBU2LSVHA9JPDZXER6C4";
 
-const items: Stock = {
-  store_code: STORE_CODE,
-  stock_category: "음료",
-  stock_name: "테스트메뉴",
-  stock_id: "1",
-  stock_price: "1000",
-  stock_description: "테스트메뉴입니다.",
-  stock_option: null,
-  stock_images: [],
-};
+
 
 // export async function getStocks(): Promise<Stock[] | boolean> {
 //   try {
@@ -52,6 +43,20 @@ export async function getStocks(): Promise<Stock[] | any> {
     );
     console.log(response.data.stocks);
     return response.data.stocks;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
+
+export async function getCategory(): Promise<StockCategory[] | any> {
+  try {
+    const response = await apiInstance.get(
+      `${BASE_URL}/biz/store/category?store_id=1`
+    );
+    console.log(response.data);
+    return response.data.categories;
   } catch (error) {
     console.error(error);
     return error;

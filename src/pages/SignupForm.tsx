@@ -3,7 +3,7 @@ import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { SignupFormInfo, SignupInfo, sendPhoneCertRequest, signUp, verifyPhoneCertification } from '../api/auth';
 import { AnimatePresence, motion} from 'framer-motion';
-import {pageTransitionVariants} from '../util/animation';
+import {pageTransitionVariants} from '../util/animation.js';
 
 function SignupForm() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm<SignupFormInfo>();

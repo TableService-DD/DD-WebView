@@ -26,13 +26,22 @@ export type Menu = {
   SANDWICH: FoodItem[];
 };
 
-export interface Stock {
-  store_code: string;
-  stock_name: string;
-  stock_id: string;
-  stock_price: string;
-  stock_description: string;
-  stock_option: { [key: string]: number } | null;
-  stock_images: Blob | any;
-  stock_category: string;
+export interface Stock{
+  id:number,
+  name:string,
+  price:number,
+  options:Object,
+  is_signiture_menu:boolean,
+  is_best_menu:boolean,
+  country_of_origin:string,
+  allergy_causing_information:string,
+  status:number,
+  image_url:string,
+
+};
+
+
+export interface StockCategory {
+  id:number,
+  name:string,
 }

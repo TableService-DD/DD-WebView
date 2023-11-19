@@ -9,9 +9,14 @@ export interface Store {
   store_status: boolean;
 }
 
-export async function getStoreList(): Promise<Store[] | boolean> {
+export interface StoreInfo {
+  id:number,
+  name:string,
+  status:number,
+}
+export async function getStoreList(): Promise<StoreInfo | boolean> {
   try {
-    const response = await apiInstance.get(`${BASE_URL}/order/store/list`);
+    const response = await apiInstance.get(`${BASE_URL}/biz/store/info?query=BY_ID&store_id=1`);
     console.log(response);
     return response.data;
   } catch (error) {
