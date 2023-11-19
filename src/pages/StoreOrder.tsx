@@ -17,45 +17,50 @@ function StoreOrder() {
   const [category, setCategory] = useState<StockCategory[]>([]);
   const [stockCache, setStockCache] = useState({});
   useEffect(() => {
-  const fetchCategory = async () => {
-    try {
-      const categories = await getCategory();
-      setCategory(categories);
-      if (categories.length > 0) {
-        setSelectedCategory(categories[0].name); // 첫 번째 카테고리로 설정
+    const fetchCategory = async () => {
+      try {
+        const categories = await getCategory();
+        setCategory(categories);
+        if (categories.length > 0) {
+          setSelectedCategory(categories[0].name); // 첫 번째 카테고리로 설정
+        }
+      } catch (error) {
+        console.error("Failed to fetch categories", error);
       }
-    } catch (error) {
-      console.error('Failed to fetch categories', error);
-    }
-  };
+    };
 
-  fetchCategory();
-}, []);
+    fetchCategory();
+  }, []);
 
   useEffect(() => {
-  const fetchStocks = async () => {
-    if (!stockCache[selectedCategory]) {
-      const categoryObj = category.find(cat => cat.name === selectedCategory);
-      if (categoryObj) {
-        try {
-          const stocks = await getStocks(categoryObj.id);
-          if (stocks !== false) {
-            setStockCache(prev => ({ ...prev, [selectedCategory]: stocks }));
-            setMenuData(stocks);
+    const fetchStocks = async () => {
+      if (!stockCache[selectedCategory]) {
+        const categoryObj = category.find(
+          (cat) => cat.name === selectedCategory
+        );
+        if (categoryObj) {
+          try {
+            const stocks = await getStocks(categoryObj.id);
+            if (stocks !== false) {
+              setStockCache((prev) => ({
+                ...prev,
+                [selectedCategory]: stocks,
+              }));
+              setMenuData(stocks);
+            }
+          } catch (error) {
+            console.error("Failed to fetch stocks", error);
           }
-        } catch (error) {
-          console.error('Failed to fetch stocks', error);
         }
+      } else {
+        setMenuData(stockCache[selectedCategory]);
       }
-    } else {
-      setMenuData(stockCache[selectedCategory]);
-    }
-  };
+    };
 
-  if (selectedCategory !== "SET") {
-    fetchStocks();
-  }
-}, [selectedCategory, category, stockCache]);
+    if (selectedCategory !== "SET") {
+      fetchStocks();
+    }
+  }, [selectedCategory, category, stockCache]);
 
   return (
     <section className="py-[10px] relative">
@@ -71,25 +76,26 @@ function StoreOrder() {
             <span
               className={`rounded-xl absolute bottom-0 left-1/2 transform -translate-x-1/2 h-[3px] animated-width 
       ${
-        selectedCategory === item.name ? "w-full bg-gradient-to-r bg-black" : "w-0"
+        selectedCategory === item.name
+          ? "w-full bg-gradient-to-r bg-black"
+          : "w-0"
       }`}
             />
             {item.name}
           </button>
         ))}
       </div>
-
-     {/* <div className="flex flex-col h-fit pb-[90px]">
-  {menuData && menuData.length > 0 ? (
-    menuData.map((item: Stock, index: number) => (
-      <MenuCard key={index} {...item} className="p-2 border-b">
-        {item.name}
-      </MenuCard>
-    ))
-  ) : (
-    <div>Loading menus...</div>
-  )}
-</div> */}
+      <div className="flex flex-col h-fit pb-[90px]">
+        {menuData && menuData.length > 0 ? (
+          menuData.map((item: Stock, index: number) => (
+            <MenuCard key={index} {...item} className="p-2 border-b">
+              {item.name}
+            </MenuCard>
+          ))
+        ) : (
+          <div>Loading menus...</div>
+        )}
+      </div>
 
       {/* {cart.length > 0 && <Carts carts={cart} />} */}
       <CartItemBtn
@@ -103,4 +109,3 @@ function StoreOrder() {
 }
 
 export default StoreOrder;
-
