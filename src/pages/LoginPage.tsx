@@ -36,20 +36,6 @@ function LoginPage() {
 
   return (
     <section className="px-8 py-12 flex flex-col gap-4 relative">
-      <button
-        className="bg-sky-400 text-white p-2 w-[200px] rounded-full
-      "
-        onClick={() =>
-          signUp({
-            name: "test",
-            email: "test",
-            password: "test",
-            phone_cert_id: 2,
-          })
-        }
-      >
-        TESTBTN
-      </button>
       {isLoading ? (
         <div className="absolute z-10 w-3/4 h-[60%] gap-4 p-4 pb-2 bg-white ring-gray-400 ring-4 shadow-md flex flex-col items-center justify-around rounded-xl top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[20%]">
           <h1 className="text-primary text-3xl font-bold">로딩 중...</h1>
@@ -63,15 +49,11 @@ function LoginPage() {
         </div>
       ) : null}
 
-      <div className="flex flex-col mb-4">
-        <h1 className="text-3xl font-bold mb-1">Mr.Qr</h1>
-        <span className="text-md text-gray-400">
-          이메일과 비밀번호를 입력해주세요.
-        </span>
-      </div>
+        <h1 className="text-3xl font-bold mb-1 text-center">Mr.Qr</h1>
+        
       <form onSubmit={handleSubmit} className="flex flex-col my-4 gap-2">
         <div className="flex flex-col mb-2">
-          <label htmlFor="id" className="text-gray-400 text-md text-start">
+          <label htmlFor="email" className="text-gray-400 text-md text-start">
             이메일
           </label>
           <input
